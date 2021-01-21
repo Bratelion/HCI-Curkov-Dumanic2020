@@ -20,6 +20,7 @@ const IndexPage = (props) => {
           <span className={styles.title}>{item.title}</span>
           <span className={styles.date}>{item.date}</span>
         </div>
+        <form type="submit" action="../../novosti" name="q"><button type="submit" className={styles.tag}>{item.tag}</button></form>
         <p className={styles.text}>{item.text}</p> 
     </div>
     </StandardPage>

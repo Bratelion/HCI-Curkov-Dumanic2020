@@ -6,22 +6,37 @@ import { FiMenu } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
 
 import Toggle from './rightNav'
+import SearchBar from "../SearchBar"
 
 import styles from './style.module.css'
 import logo from '../../images/logo-side.png'
 
 const NavigationBar = (props) =>  {
     const [rightNav, setRightNav] = useState(false);
+    const [search, setSearch] = useState(false);
     let toggle;
     let button;
+    let searchBar;
+    let searchButton;
 
     const toggleRightNav = () => rightNav === false ? setRightNav(true) : setRightNav(false);
-    if(rightNav) {
-        toggle = <Toggle style={styles.toggle}/>
-        button = <IoClose style={{ marginBottom: '-5px', height: '50px', width: '50px'}} />
+    const toggleSearch = () => search === false ? setSearch(true) : setSearch(false);
+
+    if(search) {
+        searchBar = <SearchBar />
+        searchButton = <IoClose style={{ marginBottom: '-5px', height: '35px', width: '35px' }} />
     }
     else {
-        button = <FiMenu style={{ marginBottom: '-5px', height: '50px', width: '50px'}} />
+        searchButton = <FaSearch style={{ marginBottom: '-2px', height: '25px', width: '25px' }} />
+    }
+
+    if(rightNav) {
+        toggle = <Toggle style={styles.toggle}/>
+        button = <IoClose style={{ marginBottom: '-5px', height: '35px', width: '35px'}} />
+        searchButton = <FaSearch style={{ marginBottom: '-2px', height: '20px', width: '20px'}} />
+    }
+    else {
+        button = <FiMenu style={{ marginBottom: '-5px', height: '35px', width: '35px'}} />
     }
 
     return (
@@ -39,14 +54,20 @@ const NavigationBar = (props) =>  {
                         </Link>)
                 }
                 )}
-                <FaSearch className={styles.search} style={{ marginBottom: '-2px', display: "none" }} />
+                <button className={styles.searchButton} onClick={toggleSearch}>
+                    {searchButton}
+                </button>
             </div>
             <button className={styles.hamburger} onClick={toggleRightNav}>
                 {button}
             </button>
+            <button className={styles.hamburger} onClick={toggleSearch}>
+                {searchButton}
+            </button>
             
         </header>
         {toggle}
+        {searchBar}
         </div>
         </>
     )
